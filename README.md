@@ -47,3 +47,8 @@ MSW<----7-|       |-14
  DT<----8-|       |-16
 SCK<----9-|       |-10
 </pre>
+
+##Things to add
+1. Calibration
+1. 3D files
+1. Change grapf axes ticks
