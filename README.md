@@ -33,13 +33,13 @@ This project is a coffee scale from a strain block and the HX711 chip.
 
 ### Arduino Pro Micro:
 
-        1-| [USB] |-RAW-->
-        0-|       |-GND
-      GND-|       |-RST
-   <--GND-|       |-VCC
-SDA<----2-|       |-21
-SCL<----3-|       |-20
-        4-|       |-19
+        1-| [USB] |-RAW--> <br />
+        0-|       |-GND <br />
+      GND-|       |-RST <br />
+   <--GND-|       |-VCC <br />
+SDA<----2-|       |-21 <br />
+SCL<----3-|       |-20 <br />
+        4-|       |-19 <br />
         5-|       |-18
         6-|       |-15
 MSW<----7-|       |-14
