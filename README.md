@@ -21,18 +21,19 @@ This project is a coffee scale from a strain block and the HX711 chip.
 
 ### 128x32 OLED Display:
 
-|-GND--->GND
-|-VCC--->5V (RAW)
-|-SCL--->Arduino [PIN 3 (SCL)]
-|-SDA--->Arduino [PIN 2 (SDA)]
+|-GND--->GND <br />
+|-VCC--->5V (RAW) <br />
+|-SCL--->Arduino [PIN 3 (SCL)] <br />
+|-SDA--->Arduino [PIN 2 (SDA)] <br />
 
 ### Momentary Switch:
 
-|------->GND
+|------->GND <br />
 |------->Arduino [PIN 7 (interrupt)]
 
 ### Arduino Pro Micro:
 
+<pre>
         1-| [USB] |-RAW--> <br />
         0-|       |-GND <br />
       GND-|       |-RST <br />
@@ -45,3 +46,4 @@ SCL<----3-|       |-20 <br />
 MSW<----7-|       |-14
  DT<----8-|       |-16
 SCK<----9-|       |-10
+</pre>
