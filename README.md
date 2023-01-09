@@ -14,10 +14,10 @@ This project is a coffee scale from a strain block and the HX711 chip.
 
 ### HX711:
 
-|-VCC--->5V (RAW)
-|-SCK--->Arduino [PIN 9]
-|-DT---->Arduino [PIN 8]
-|-GND--->GND
+|-VCC--->5V (RAW) <br />
+|-SCK--->Arduino [PIN 9] <br />
+|-DT---->Arduino [PIN 8] <br />
+|-GND--->GND <br />
 
 ### 128x32 OLED Display:
 
