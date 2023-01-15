@@ -51,7 +51,7 @@ unsigned long ti = 0;
 
 bool mode = 0; //Mode 0 is for fluid out weight, Mode 1 is for grind weight 
 
-const float portafilter = 170; //Portafilter weight in grams
+const float portafilter = 92; //Portafilter weight in grams
 
 const float calibration = 0.627; //Previously calculated calibration data
 
