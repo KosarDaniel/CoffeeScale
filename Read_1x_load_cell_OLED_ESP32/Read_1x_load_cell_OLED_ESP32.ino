@@ -53,6 +53,8 @@ bool mode = 0; //Mode 0 is for fluid out weight, Mode 1 is for grind weight
 
 const float portafilter = 170; //Portafilter weight in grams
 
+const float calibration = 0.627; //Previously calculated calibration data
+
 void setup() {
   Serial.begin(57600); delay(10);
   Serial.println();
@@ -91,10 +93,11 @@ void setup() {
   display.cp437(true);         // Use full 256 char 'Code Page 437' font
 
   pinMode(7, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(7), reset, RISING);
 
   drawCoordinate();
-  display.display;
+  display.display();
+
+  attachInterrupt(digitalPinToInterrupt(7), reset, FALLING);
 }
 
 void loop() {
@@ -112,7 +115,7 @@ void loop() {
       i = LoadCell.getData();
       //display.clearDisplay();
       display.fillRect(0, 0, 64, 64, SSD1306_BLACK);
-      //i = i*0.6482;
+      i = i*calibration;
       i = (i*0.5+ii+iii*1.5)/3;
       String str = String(i,1);
       if(i<10 && i>=0) str = "0"+str;
@@ -143,16 +146,20 @@ void loop() {
         */
         if(31-i*0.5-3 >= 0 && 31-i*0.5-3 <= 28){
           display.drawPixel(64+(millis()-ti)/500, int(31-i*0.5)-3, SSD1306_WHITE);
+        }
+        }else{
+          display.clearDisplay();
+          str = String(i-portafilter,1);
+          if(i-portafilter<10 && i-portafilter>=0){
+            str = "0"+str;
+          }else if(i-portafilter<0){
+            str = "-";
           }
-      }else{
-        display.clearDisplay;
-        str = String(i-portafilter,1);
-        if(i-portafilter<10 && i-portafilter>=0) str = "0"+str;
         display.setCursor(0, 0);
-        display.setTextSize(2);
+        display.setTextSize(4);
         display.print(str);
-        display.setTextSize(1);
-        display.print("g");
+        display.setTextSize(2);
+        if(i-portafilter>=0) display.print("g");
       }
       display.display();
       newDataReady = 0;
@@ -166,23 +173,23 @@ void reset(){
   display.clearDisplay();
   drawCoordinate();
   //display.display();
-  attachInterrupt(digitalPinToInterrupt(7), 3sec, FALLING);
+  attachInterrupt(digitalPinToInterrupt(7), threeSec, RISING);
   }
  
-void 3sec(){
-  if(ti>3000) changeMode();
-  attachInterrupt(digitalPinToInterrupt(7), reset, RISING);
+void threeSec(){
+  if(millis()-ti>2000) changeMode();
+  attachInterrupt(digitalPinToInterrupt(7), reset, FALLING);
   }
 
 void changeMode(){
   LoadCell.tareNoDelay();
-  mode = mode!;
+  mode = !mode;
   }
 
 void drawCoordinate(){
   display.drawLine(64, 29, 127, 29, SSD1306_WHITE);
   for(int j = 0; j < 17; j++){
     display.drawPixel(64+j*4, 30, SSD1306_WHITE);
-    display.drawPixel(64+j*4, 31, SSD1306_WHITE);
+    display.drawPixel(64+j*20, 31, SSD1306_WHITE);
     }
   }
